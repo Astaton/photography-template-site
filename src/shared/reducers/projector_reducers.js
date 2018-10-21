@@ -9,8 +9,11 @@ function projector_reducers(state=initialState, action) {
 		case 'STORE_CURRENT_SLIDE_INFO':
 			let currentSlideInfo = action.currentSlideInfo;
 			return { ...state, currentSlideInfo }
-		case 'INCREMENT_SLIDE':
+		case 'STORE_CURRENT_SLIDE_NO':
 			let currentSlideNo = action.currentSlideNo;
+			return { ...state, currentSlideNo}
+		case 'INCREMENT_SLIDE':
+			currentSlideNo = action.currentSlideNo;
 			let totalNoSlides = action.totalNoSlides;
 			if(currentSlideNo == totalNoSlides - 1){
 				currentSlideNo = 0;

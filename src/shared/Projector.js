@@ -71,6 +71,7 @@ class Projector extends Component {
 
 	updateSlideShow() {
 		let { slides, currentSlideNo } = this.props.projector;
+		console.log("in updateSlideShow props are: ", this.props);
 		this.filmstripOverlayShifter();
 		this.props.store_current_slide_info(slides[currentSlideNo]);
 	}
@@ -116,7 +117,7 @@ class Projector extends Component {
 	}
 
 
-	filmStripHandler() {
+	projectorDownHandler() {
 		let calculatedWidth = this.props.projector.slides.length*200+"px";
 		this.props.show_filmstrip(!this.props.projector.showFilmstrip);
 		setTimeout( () => { $('#filmstrip__container').css('width', calculatedWidth) }, 25);
@@ -172,7 +173,11 @@ class Projector extends Component {
 	render(){
 		let { currentSlideInfo, showFilmstrip, slides } = this.props.projector;
 		return(
-			<div id="projector" className="projector" onMouseEnter={ () => this.shiftProjectorControls()} onMouseLeave={ () => this.unshiftProjectorControls()}>
+			<div id="projector" 
+				className="projector" 
+				onMouseEnter={ () => this.shiftProjectorControls()} 
+				onMouseLeave={ () => this.unshiftProjectorControls()}
+			>
 				{currentSlideInfo ? 
 					<Slide photoInfo={currentSlideInfo} 
 						styleFor={this.props.styleFor} 
@@ -181,23 +186,25 @@ class Projector extends Component {
 					<Loader />
 				}
 				{slides ?
-					<Filmstrip slides={slides} />
+					<Filmstrip slides={slides} 
+						updateSlideShow={ () => this.updateSlideShow()}
+					/>
 					:
 					null
 				}
-				<span id="projector__control-left" className="projector__control-left">
+				<span id="projector__control-left" className="projector__control-left" title="See previous photo">
 					<b className="projector__control-srt">left arrow</b>
 					<i className="fas fa-chevron-circle-left" onClick={() => this.previousSlide()} ></i>
 				</span>
-				<span id="projector__control-right" className="projector__control-right">
+				<span id="projector__control-right" className="projector__control-right" title="See next photo">
 					<b className="projector__control-srt">right arrow</b>
 					<i className="fas fa-chevron-circle-right" onClick={() => this.nextSlide()} ></i>
 				</span>
-				<span id="projector__control-down" className="projector__control-down">
+				<span id="projector__control-down" className="projector__control-down" title="See all photos in current gallery">
 					<b className="projector__control-srt">down arrow</b>
-					<i className="fas fa-chevron-circle-down" onClick={() => this.filmStripHandler()}></i>
+					<i className="fas fa-chevron-circle-down" onClick={() => this.projectorDownHandler()}></i>
 				</span>
-				<span id="projector__control-pause" className="projector__control-pause">
+				<span id="projector__control-pause" className="projector__control-pause" title="Pause slide show">
 					<b className="projector__control-srt">pause arrow</b>
 					<i className="fas fa-pause-circle" onClick={() => this.pauseButtonHandler()}></i>
 				</span>
@@ -210,4 +217,4 @@ const stateToProps = state => { return { projector: state.projector} }
 
 const dispatchToProps = dispatch => { return bindActionCreators(actionCreators, dispatch) }
 
-export default connect(stateToProps, dispatchToProps)(Projector);
+export default connect(stateToProps, dispatchToProps)(Projector); 

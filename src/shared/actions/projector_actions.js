@@ -5,6 +5,13 @@ export function store_current_slide_info(currentSlideInfo) {
 	}
 }
 
+export function store_current_slide_no(currentSlideNo) {
+	return {
+		type: 'STORE_CURRENT_SLIDE_NO',
+		currentSlideNo
+	}
+}
+
 export function increment_slide(currentSlideNo, totalNoSlides) {
 	return {
 		type: 'INCREMENT_SLIDE',

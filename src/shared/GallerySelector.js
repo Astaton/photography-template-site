@@ -98,7 +98,14 @@ class GallerySelector extends Component {
 			$("#gallery__images").toggleClass("gallery__images");
 			$("#gallery__images").toggleClass("gallery__images-closed");
 		}
+		setTimeout( () => {
+			$('html,body').animate({
+				scrollTop: $("#main").offset().top
+			});
+		},1500);
 	}
+
+
 
 	// closeGallery() {
 	// 	if($("#main").hasClass("main--gallery")){
