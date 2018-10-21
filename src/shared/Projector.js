@@ -181,7 +181,7 @@ class Projector extends Component {
 					<Loader />
 				}
 				{slides ?
-					<Filmstrip slides={slides}/>
+					<Filmstrip slides={slides} />
 					:
 					null
 				}

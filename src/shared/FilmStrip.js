@@ -44,12 +44,27 @@ class Filmstrip extends Component{
 		return mappedSlides
 	}
 
+	filmstripContainerShifter(shiftBy) {
+		let travelDistance = document.getElementById('filmstrip__container').offsetWidth -document.getElementById('projector').offsetWidth;
+		let proposedPosition = parseInt($('#filmstrip__container').css('left')) + shiftBy;
+		if(travelDistance <= 0 || proposedPosition > 0 || travelDistance + proposedPosition < 0){
+			return
+		}
+		let filmstripPosition = parseInt($('#filmstrip__container').css('left'));
+		let leftArrowPosition = parseInt($('#filmstrip__control-left').css('left'));
+		let rightArrowPosition = parseInt($('#filmstrip__control-right').css('left'));
+		$('#filmstrip__container').css('left', filmstripPosition + shiftBy);
+		$('#filmstrip__control-left').css('left', leftArrowPosition + (shiftBy*-1));
+		$('#filmstrip__control-right').css('left', rightArrowPosition + (shiftBy*-1));
+	}
+
+
 	filmstripLeft() {
-		console.log("shifted filmstrip left");
+		this.filmstripContainerShifter(200);
 	}
 
 	filmstripRight() {
-		console.log("shifted filmstrip right")
+		this.filmstripContainerShifter(-200);
 	}
 
 

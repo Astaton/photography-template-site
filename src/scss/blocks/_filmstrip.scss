@@ -13,7 +13,7 @@
 		bottom: -150;
 		left: 0;
 		opacity: 0;
-		transition: bottom .75s, opacity .75s, visibility .75s;
+		transition: bottom .75s, opacity .75s, visibility .75s, left .5s;
 	}
 
 %filmstrip__control-default {
@@ -26,7 +26,7 @@
 	background-color: #00000096;
 	top: 50%;
 	margin-top: em(-8px, $context: 32px);
-	transition: all .25s;
+	transition: color .25s, background-color .25s, left .5s;
 	&:active {
 		background-color: #000000CC;
 		color: $color-primary;
