@@ -1,0 +1,48 @@
+//=======================================================
+//extends
+//=======================================================
+//contact-container-default extended from _contact.scss
+
+%messenger__input-default {
+	background-color: rgba(255, 255, 255, .25);
+	width: 100%;
+    border-right-style: outset;
+}
+
+
+//=======================================================
+//element class styles
+//=======================================================
+.messenger {
+	&__container {
+		@extend %contact-container-default;
+		margin: auto;
+	}
+
+	&__input-name, &__input-email, &__input-number {
+		@extend %messenger__input-default;
+		height: em(40px);
+	}
+
+	&__input-number {
+		margin: em(6px) 0;
+	}
+
+	&__input-message {
+		@extend %messenger__input-default;
+		margin: em(24px) 0;
+		height: em(150px);
+	}
+
+	&__button {
+		background-color: lighten($color-secondary, 25%);
+		font: em(22px) $header-font;
+		color: white;
+		width: 100%;
+		height: em(32px, $context: 22px);
+
+		&:active {
+			background-color: $color-secondary;
+		}
+	}
+}

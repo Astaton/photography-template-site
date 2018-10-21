@@ -1,0 +1,6 @@
+%page-wrapper-default {
+	@include flexy($dir: column);
+	min-height: 100%;
+	background-position: center;
+    background-size: cover;
+}

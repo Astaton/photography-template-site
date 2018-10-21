@@ -1,0 +1,58 @@
+//=======================================================
+//extends
+//=======================================================
+//%srt-default extended from utilities/extends
+//%ust-default extended from utilities/extends
+
+%gallery__images-default {
+	height: 700px;
+	width: 1400px;
+	border: 3px solid black;
+	filter: drop-shadow(0px 0px 3px white);
+	background-color: white;
+	opacity: 1;
+	transition: opacity 1.5s;
+}
+
+
+
+//=======================================================
+//element styles
+//=======================================================
+.gallery {
+	&__close {
+		@extend %ust-default;
+		position: absolute;
+		font-size: em(40px);
+		color: white;
+		filter: drop-shadow(0px 0px 2px white);
+		cursor: pointer;
+		top: 0;
+		margin-top: .5em;
+		right: 0;
+		margin-right: .5em;
+		padding: 0 em(20px, 40px);
+		border: 1px solid white;
+		z-index: placeOnLayer(back);
+	}
+
+	&__images {
+		@extend %gallery__images-default;
+	}
+
+	&__close-srt {
+		@extend %srt-default;
+	}
+}
+
+
+//=======================================================
+//modifier styles
+//=======================================================
+
+.gallery {
+	&__images-closed {
+		@extend %gallery__images-default;
+		opacity: 0;
+	}
+}

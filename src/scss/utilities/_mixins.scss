@@ -1,0 +1,75 @@
+//=======================================================
+//Mixins
+//=======================================================
+
+//Media Queries
+@mixin mq($break) {
+	$value: map-get($breakpoints, $break);
+	$sm: map-get($breakpoints, 'sm');
+
+	@if $value == null {
+		@error "#{$break} is an invalid breakpoint name";
+	}
+	@else if $value < $sm {
+		@media (max-width: $value) {
+			@content;
+		}
+	}
+	@else {
+		@media (min-width: $value) {
+			@content;
+		}
+	}
+}
+
+//Center
+@mixin center($w: 90%, $max: $max-width, $marginL: auto, $marginR: auto) {
+	width: $w;
+	max-width: $max;
+	margin-left: $marginL;
+	margin-right: $marginR;
+}
+
+//Flex Containers
+@mixin flexy(
+	$disp: flex,
+	$dir: null,
+	$wrap: null,
+	$just: null ){
+	display: $disp;
+	flex-direction: $dir;
+	flex-wrap: $wrap;
+	justify-content: $just;
+}
+
+//Background Images
+@mixin backgrounder(
+	$url: null,
+	$pos: center,
+	$rep: no-repeat) {
+	background-image: url($url);
+	background-position: $pos;
+	background-repeat: $rep;
+}
+
+//settings for Slide__frames
+@mixin framer(
+	$position: relative,
+	$width: null,
+	$height: null) {
+	position: $position;
+	width: $width;
+	height: $height;
+	@content;
+}
+
+//settings for Slide__photo
+@mixin slide-photo(
+	$position: absolute,
+	$max-w: null,
+	$max-h: null) {
+	position: $position;
+	max-width: $max-w;
+	max-height: $max-h;
+	@content;
+}

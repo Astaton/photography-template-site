@@ -1,0 +1,129 @@
+//=======================================================
+//extends
+//=======================================================
+//%ust-default extended from utilities/extends
+
+%gallerySelector__section-default {
+	filter: blur(1.6px) grayscale(1);
+	height: 100%;
+	width: 100%;
+	background-size: cover;
+	overflow: hidden;
+	transform: scale(1,1);
+	transition: filter 1.5s, transform 1.5s, top 1s;
+	position: absolute;
+	z-index: placeOnLayer(midBack);
+}
+
+%gallerySelector__section-container-default {
+	@include flexy($dir: column, $just: space-around);
+	height: 0%;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	flex: 1;
+	flex-basis: 50%;
+	transition: all .75s;
+	@include mq(ml){
+		flex-basis: 0;
+	}
+}
+
+%gallerySelector__container-default {
+	@include flexy($dir: row, $wrap: wrap);
+		position: absolute;
+		top: 0;
+    	height: 100%;
+		width: 100%;
+		transition: top 1s;
+		@include mq(ml){
+			flex-wrap: nowrap;
+		}
+}
+
+//=======================================================
+//element styles
+//=======================================================
+
+.gallerySelector {
+	&__container {
+		@extend %gallerySelector__container-default;
+	}
+
+	&__section-container {
+		@extend %gallerySelector__section-container-default;
+	}
+
+	&__section {
+		@extend %gallerySelector__section-default;
+	}
+
+	&__text {
+		@extend %ust-default;
+		color: white;
+		text-shadow: 2px 2px 3px black;
+    	filter: drop-shadow(1px 1px 3px black);
+		font: em(26px) $text-font;
+		border: 2px solid white;
+		width: em(150px, $context: 26px);
+    	text-align: center;
+    	margin: auto;
+    	position: relative;
+    	z-index: placeOnLayer(midBack);
+
+    	@include mq(lg){
+    		width: em(225px, $context: 26px);
+    	}
+	}
+}
+
+#gallerySelector {
+	&__1 {
+		@include backgrounder($url: '../../assets/images/galleries/action/daylight.jpg');
+		&-container {
+			@indclude mq(ml) {
+				flex: 1;
+			}
+		}
+	}
+	&__2 {
+		@include backgrounder($url: '../../assets/images/galleries/events/wedding-asile.jpeg');
+	}
+	&__3 {
+		@include backgrounder($url: '../../assets/images/galleries/landscape/lake-peir.jpeg');
+	}
+	&__4 {
+		@include backgrounder($url: '../../assets/images/galleries/portrait/carnival-night.jpg');
+	}
+}
+
+//=======================================================
+//modifier styles
+//=======================================================
+
+.gallerySelector {
+	&__section-container--slide-in {
+		@extend %gallerySelector__section-container-default;
+		height: 50%;
+		@include mq(ml) {
+			height: 100%;
+		}
+	}
+
+	&__container--open {
+		@extend %gallerySelector__container-default;
+		top: -110%;
+	}
+
+	&__section--hover {
+		@extend %gallerySelector__section-default;
+		filter: blur(0px) grayscale(0);
+		// overflow: hidden;
+		transform: scale(1.15,1.15);
+		@include mq(ml) {
+			flex: 1;
+		}
+	}
+}
+
+

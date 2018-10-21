@@ -1,0 +1,121 @@
+//=======================================================
+//extends
+//=======================================================
+//%srt-default extended from utilities/_extends
+
+%projector__control-stub {
+	position: absolute;
+	font-size: em(32px);
+	cursor: pointer;
+	color: darken($color-secondary, 5%);
+	z-index: placeOnLayer(front);
+	transition: all .6s;
+	border: em(1px, $context: 32px) solid #c4bcbc;
+	background-color: #c4bcbc; 
+    border-radius: 50%;
+	opacity: 0;
+
+	&:hover {
+			color: $color-primary;
+	}
+}
+
+%projector__control-sides-stub {
+	@extend %projector__control-stub;
+	top: 50%;
+	margin-top: em(-16px, $context: 32px);
+}
+
+%projector__control {
+	&-left-default {
+		@extend %projector__control-sides-stub;
+		left: em(-30px, $context: 32px);
+	}
+
+	&-right-default {
+		@extend %projector__control-sides-stub;
+		right: em(-30px, $context: 32px);
+	}
+
+	&-down-default {
+		@extend %projector__control-stub;
+		right: 50%;
+		margin-right: em(-16px, $context: 32px);
+		bottom: 0;
+	}
+
+	&-pause-default {
+		@extend %projector__control-stub;
+		top: 0;
+		right: 0;
+	}
+
+}
+
+//=======================================================
+//element class styles
+//=======================================================
+
+.projector {
+	position: relative;
+	height: 100%;
+	
+	&__control-srt {
+		@extend %srt-default;
+	}
+
+	&__control-left {
+		@extend %projector__control-left-default;
+	}
+
+	&__control-right {
+		@extend %projector__control-right-default;
+	}
+
+	&__control-down {
+		@extend %projector__control-down-default;
+	}
+
+	&__control-pause {
+		@extend %projector__control-pause-default;
+	}
+}
+
+
+//=======================================================
+//modifier styles
+//=======================================================
+
+.projector {
+
+	&__control-left--shift {
+		@extend %projector__control-left-default;
+		left: em(6px, $context: 32px);
+		opacity: 1;
+	}
+
+	&__control-right--shift {
+		@extend %projector__control-right-default;
+		right: em(6px, $context: 32px);
+		opacity: 1;
+	}
+
+	&__control-down--shift {
+		@extend %projector__control-down-default;
+		bottom: em(10px, $context: 32px);
+		opacity: 1;
+	}
+
+	&__control-down--filmstrip-shift {
+		@extend %projector__control-down-default;
+		bottom: em(165px, $context: 32px);
+		opacity: 1;
+	}
+
+	&__control-pause--shift {
+		@extend %projector__control-pause-default;
+		margin-top: em(16px, $context: 32px);
+	    margin-right: em(16px, $context: 32px);
+	    opacity: 1;
+	}
+}

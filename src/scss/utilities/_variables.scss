@@ -1,0 +1,34 @@
+//Typography
+$base__font-size: 16px;
+$base__line: 24px;
+$header-font: 'Yellowtail';
+$text-font: 'Open Sans';
+
+//Colors
+$color-primary: #2196f3;
+$color-secondary: #373535;
+
+//Layout
+$max-width: 1000px;
+
+//Path to Assets not right
+$path--rel: "../../assets/";
+
+
+//Breakpoints
+$breakpoints: (
+	'xs': 575px,
+	'sm': 576px,
+	'md': 630px,
+	'ml': 750px,
+	'lg': 992px
+);
+
+//Z-Index levels
+$indexLayers: (
+	'back': 0,
+	'midBack': 5,
+	'middle': 10,
+	'midFront': 15,
+	'front': 20
+);

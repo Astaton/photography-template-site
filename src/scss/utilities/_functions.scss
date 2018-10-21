@@ -1,0 +1,10 @@
+//Calculate en values
+@function em($target, $context: $base__font-size) {
+	@return ($target / $context) * 1em;
+}
+
+//place divs on z-index layers
+@function placeOnLayer($layer){
+	$value: map-get($indexLayers, $layer);
+	@return $value;
+}

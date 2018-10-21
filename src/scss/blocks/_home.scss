@@ -1,0 +1,84 @@
+//=======================================================
+//extends
+//=======================================================
+//ust-default extended from utlities/extends
+
+%home__filter-box-default {
+	position: absolute;
+	background-color: white;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	z-index: placeOnLayer(back);
+}
+
+//=======================================================
+//element class styles
+//=======================================================
+
+.home {
+	&__welcome {
+		@include flexy($dir: column, $just: space-around);
+		text-align: center;
+		margin: auto;
+		max-width: 800px;
+	}
+	&__welcome-text {
+		@extend %ust-default;
+		color: white;
+		font-family: $header-font;
+		text-shadow: 3px 3px 3px black;
+		filter: drop-shadow(6px 6px 6px black);
+	}
+	&__filter-box {
+		@extend %home__filter-box-default;
+	}
+}
+
+//=======================================================
+//element id styles
+//=======================================================
+
+#home{
+	&__welcome-text {
+		font-size: em(72px);
+		position: absolute;
+		top: -1000%;
+		z-index: placeOnLayer(back);
+
+		@include mq(ml) {
+			position: static;
+		}
+
+		@include mq(lg) {
+			font-size: em(80px);
+		}
+	}
+
+	&__welcome-text-mobile {
+		font-size: em(48px);
+		
+		@include mq(ml) {
+			display: none;
+		}
+	}
+}
+
+//=======================================================
+//modifier styles
+//=======================================================
+
+.home__filter-box {
+	&--flash-in {
+		@extend %home__filter-box-default;
+		animation: main-develop 2.5s;
+		@keyframes main-develop {
+			from { 
+				opacity: .5;
+			}
+			to { 
+				opacity: 0;
+			}
+		}
+	}
+}

@@ -1,0 +1,61 @@
+//=======================================================
+//extends
+//=======================================================
+
+%slide__frame-default {
+	position: relative;
+}
+
+%slide__photo-default {
+	position: absolute;
+	top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto auto;
+}
+
+//=======================================================
+//element class styles
+//=======================================================
+
+.slide{
+	&__frame {
+		@include framer();
+	}
+
+	&__photo {
+		@extend %slide__photo-default;
+	}
+}
+
+//=======================================================
+//modifier styles
+//=======================================================
+
+//for about page
+.slide{
+	&__frame--about {
+		@include framer($width: 250px, $height: 250px);
+	}
+
+	&__photo--about {
+		@extend %slide__photo-default;
+		max-width: 250px;
+		max-height: 250px;
+	}
+}
+
+
+//for gallery page
+.slide{
+	&__frame--gallery {
+		@include framer($width: 1400px, $height: 700px);
+	}
+
+	&__photo--gallery {
+		@extend %slide__photo-default;
+		max-width: 1400px;
+		max-height: 700px;
+	}
+}

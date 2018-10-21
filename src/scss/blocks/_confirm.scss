@@ -1,0 +1,56 @@
+//=======================================================
+//extends
+//=======================================================
+
+%confirm__container-default {
+	position: absolute;
+	background-color: $color-primary;
+    color: white;
+    top: -60%;
+    padding: 2.25em;
+    height: 200px;
+    width: 200px;
+    border: 5px solid white;
+    transition: top 1s;
+}
+
+//=======================================================
+//element class styles
+//=======================================================
+
+.confirm {
+	&__container {
+		@extend %confirm__container-default;
+	}
+
+	&__header {
+		font-family: $header-font;
+	}
+
+	&__text {
+		font-family: $text-font;
+	}
+
+	&-loader__container {
+		height: 55px;
+    	width: 55px;
+    	margin: 0 auto;
+	}
+
+	&-loader__logo {
+		height: 55px;
+	}
+}
+
+
+
+//=======================================================
+//modifier styles
+//=======================================================
+
+.confirm {
+	&__container--drop-in {
+		@extend %confirm__container-default;
+		top: 30%;
+	}
+}

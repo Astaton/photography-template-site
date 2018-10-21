@@ -1,0 +1,135 @@
+//=======================================================
+//extends
+//=======================================================
+
+%header-text-default {
+	color: white;
+	font: em(24px) $text-font;
+}
+
+%mobile-nav-default { 
+		position: absolute;
+		background-color: $color-primary;
+    	opacity: .95;
+    	width: 100%;
+    	top: 47px;
+	    transition: left 1s;
+	    z-index: placeOnLayer(front);
+	}
+
+//=======================================================
+//element class styles
+//=======================================================
+
+.header {
+	@include flexy($wrap: wrap, $just: space-between, $dir: row);
+	position: relative;
+	background-color: $color-primary;
+	opacity: .8;
+	z-index: placeOnLayer(front);
+
+	&__brand-container {
+		@include flexy($just: space-around, $dir: row);
+		flex: 1;
+		align-items: center;
+		
+		@include mq(lg){
+			justify-content: space-between;
+		}
+	}
+
+	&__brand-link {
+		display: flex;
+    	align-items: center;
+	}
+
+	&__brand-logo {
+		height: 35px;
+		padding: em(6px);
+		
+		@include mq(sm) {
+			margin-left: 10px;
+		}
+	}
+
+	&__mobile-menu-icon {
+		color: white;
+		
+		@include mq(sm) {
+			display: none;
+		}
+	}
+
+	&__brand-name {
+		@extend %header-text-default;
+	}
+
+	&__nav {
+		display: none;
+		margin-right: auto;
+    	margin-left: auto;
+    	overflow: hidden;
+		
+		@include mq(sm) {
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	&__link-list {
+		@include flexy($wrap: wrap, $dir: row, $just: space-around);
+		align-items: center;
+	}
+
+	&__links {
+		@extend %header-text-default;
+		padding: em(8px, $context: 24px) em(10px, $context: 24px);
+		&:hover {
+			background-color: lighten($color-secondary, 25%);
+		}
+	}
+
+	&__mobile-nav { 
+		@extend %mobile-nav-default;
+		left: -100%;
+	}
+
+	&__mobile-link-list {
+		@include flexy($wrap: nowrap, $dir: column, $just: space-around);
+		text-align: center;
+	}
+
+	&__mobile-links {
+		@extend %header-text-default;
+	}
+}
+
+//active class is set on active anchors by react router
+.active {
+	background-color: lighten($color-secondary, 15%);
+}
+
+
+//=======================================================
+//element id styles
+//=======================================================
+
+//specify background color of brand-link to the element's id to overide the active class background color. 
+//element will stay default color even when active.
+#header {
+	&__brand-link{
+		background-color: $color-primary;
+		opacity: .8;
+	}
+}
+
+
+//=======================================================
+//modifier styles
+//=======================================================
+.header {
+	&__mobile-nav--slide-in { 
+		@extend %mobile-nav-default;
+		left: 0;
+	}
+}

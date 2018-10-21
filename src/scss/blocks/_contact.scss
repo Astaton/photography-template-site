@@ -1,0 +1,51 @@
+//=======================================================
+//extends
+//=======================================================
+//srt-default extended from utilities/extends
+
+%contact-container-default {
+	background-color: rgba(255, 255, 255, .8);
+	max-width: 450px;
+}
+
+
+//=======================================================
+//element class styles
+//=======================================================
+.contact {
+	&__header {
+		font: em(32px) $header-font;
+		margin-top: 0;
+	}
+
+	&__info-outter-container {
+		flex: 1;
+	}
+
+	&__info-inner-container {
+		@extend %contact-container-default;
+		box-sizing: border-box;
+		margin: em(32px) auto 0;
+		padding: em(32px) em(16px);
+		@include mq(ml) {
+			padding: em(48px) em(32px);
+			margin: 0 auto;
+			box-sizing: content-box;
+		}
+	}
+
+	&__text-container {
+		margin-bottom: em(30px);
+	}
+
+	// &__address-container {
+	// }
+
+	&__srt {
+		@extend %srt-default;
+	}
+
+	&__message-container {
+		flex: 1;
+	}
+}

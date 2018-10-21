@@ -1,0 +1,67 @@
+//=======================================================
+//extends
+//=======================================================
+
+%about-text-default {
+	font: em(20px) $text-font;
+}
+
+
+//=======================================================
+//element class styles
+//=======================================================
+
+.about {
+	&__container {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 em(10px) em(10px);
+
+		@include mq(sm) {
+			padding: 0 em(48px) em(48px);
+		}
+
+		@include mq(lg) {
+			border-right: 1px solid black;
+    		border-left: 1px solid black;
+       	}
+	}
+
+	&__images {
+	    height: 250px;
+	    width: 250px;
+	    margin: em(30px) auto 0;
+	    background-color: lighten($color-secondary, 20%);
+	    border: 2px solid black;
+
+
+	    @include mq(ml) {
+	    	margin: em(10px) em(50px) em(50px) 0;
+	    	float: left;
+	    }
+	}
+
+	&__page-header {
+		font: em(32px, $context: 20px) $header-font;
+		border-bottom: 1px solid black;
+	    width: em(150px, $context: 20px);
+	    margin: auto;	
+	}
+
+	&__section-header {
+		font: em(24px, $context: 20px) $header-font;
+		margin-right: em(12px, $context: 20px);
+	}
+
+	&__text {
+		@extend %about-text-default;
+		margin: em(24px, $context: 20px) 0;
+	}
+
+	&__list {
+		@extend %about-text-default;
+		list-style-type: disc;
+		list-style-position: inside;
+		margin-top: em(8px, $context: 20px);
+	}
+}

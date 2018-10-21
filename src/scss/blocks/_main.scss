@@ -1,0 +1,59 @@
+//=======================================================
+//extends
+//=======================================================
+
+%main-default {
+	@include flexy($dir: column, $just: space-around);
+	flex: 1;
+	position: relative;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	z-index: placeOnLayer(back);
+	transition: all 1.5s;
+}
+
+//=======================================================
+//element class styles
+//=======================================================
+
+.main {
+	@extend %main-default;
+}
+
+//=======================================================
+//modifier styles
+//=======================================================
+
+.main--home {
+	@extend %main-default;
+	overflow: hidden;
+}
+
+.main--about {
+	@extend %main-default;
+	display: block;
+	height: auto;
+	padding-bottom: em(32px);
+}
+
+.main--contact {
+	@extend %main-default;
+	@include backgrounder($url: '../../assets/images/bokeh-map.png');
+	height: auto;
+	flex-basis: auto;
+	@include mq(ml) {
+		flex-direction: row;
+		min-height: 475px;
+		height: 100%;
+		flex-basis: 0;
+	}
+}
+
+.main--gallery {
+	@extend %main-default;
+	background-color: darken( #373535, 15%);
+    background-image: radial-gradient(#ffffff00 65%, #ffffff05, #00000059 85%);
+	flex-basis: 100%;
+	overflow: hidden;
+}

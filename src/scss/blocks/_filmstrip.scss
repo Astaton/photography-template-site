@@ -1,0 +1,88 @@
+//=======================================================
+//extends
+//=======================================================
+//%ust-default extended from utilities/extends
+//%srt-default extended from utilities/extends
+
+%filmstrip__container-default {
+		position: absolute;
+		visibility: hidden;
+		border-top: 2px dashed black;
+		border-bottom: 2px dashed black;
+		background-color: #ffffff8c;
+		bottom: -150;
+		left: 0;
+		opacity: 0;
+		transition: bottom .75s, opacity .75s, visibility .75s;
+	}
+
+%filmstrip__control-default {
+	@extend %ust-default;
+	position: absolute;
+	font-size: em(32px);
+	color: white;
+	padding: 0 em(8px, $context: 32px);
+	background-color: #00000096;
+	top: 50%;
+	margin-top: em(-8px, $context: 32px);
+	transition: all .25s;
+	&:active {
+		background-color: #000000CC;
+		color: $color-primary;
+	}
+}
+
+//=======================================================
+//element class styles
+//=======================================================
+.filmstrip {
+	&__container {
+		@extend %filmstrip__container-default;
+	}
+
+	&__control-left {
+		@extend %filmstrip__control-default;
+		border-radius: 35% 10% 10% 35%;
+		left: em(8px, $context: 32px);
+	}
+
+	&__control-right {
+		@extend %filmstrip__control-default;
+		border-radius: 10% 35% 35% 10%;
+		left: em(1360px, $context: 32px);
+	}
+
+	&__control-srt {
+		@extend %srt-default;
+	}
+
+	&__cell {
+		position: relative;
+		display: inline-block;
+		height: 150px;
+		width: 200px;
+	}
+
+	&__image-wrapper {
+		@include flexy($dir: column, $just: space-around);
+		width: 100%;
+    	height: 100%;
+    	align-items: center;
+	}
+
+	&__image {
+		position: absolute;
+		max-height: 150px;
+		max-width: 200px
+	}
+}
+//=======================================================
+//modifier styles
+//=======================================================
+
+.filmstrip__container--slide-in {
+	@extend %filmstrip__container-default;
+	visibility: visible;
+	bottom: 0;
+	opacity: 1;
+}

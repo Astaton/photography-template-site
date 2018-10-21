@@ -1,0 +1,33 @@
+
+//=======================================================
+//Yellowtail Font
+//=======================================================
+@font-face {
+	font-family: 'Yellowtail';
+	src: 
+		// local('Yellowtail'),
+		url('../../assets/fonts/Yellowtail-regular.eot')
+		format('embedded-opentype');
+	src: 
+		// local('Yellowtail'),
+		url('../../assets/fonts/Yellowtail-regular.ttf')
+		format('truetype');
+}
+
+//=======================================================
+//Open Sans Font
+//=======================================================
+
+@font-face {
+	font-family: 'Open Sans';
+	src: 
+		local('Open Sans'),
+		local('Open-Sans'),
+		url('../../assets/fonts/OpenSans-Regular.eot')
+		format('embedded opentype');
+	src: 
+		local('Open Sans'),
+		local('Open-Sans'),
+		url('../../assets/fonts/OpenSans-Regular.ttf')
+		format('truetype');
+}

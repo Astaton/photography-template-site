@@ -1,0 +1,166 @@
+//=======================================================
+//extends
+//=======================================================
+//%srt-default extended from utilities/_extends
+
+%footer__social-link-default {
+	font-size: 1.5em;
+	border-radius: 50%;
+	padding: em(6px, $context: 24px);
+	margin: 0 0;
+	color: white;
+	background:  rgba(0,0,0,0);
+	border: em(3px, $context: 24px) solid white;
+	flex: 1;
+	transition: transform 1s, background 1.5s, color 1.5s;
+	@include mq(sm) {
+		margin: em(7px, $context: 24px) 0;
+	}
+}
+
+%footer__body-text-default {
+	color: white;
+}
+
+%footer__content-container-default {
+	max-width: 400px;
+    margin: 0 auto;
+}
+
+//=======================================================
+//element class styles
+//=======================================================
+
+.footer {
+	&__body {
+		@include flexy($wrap: wrap, $just: space-around, $dir: row);
+		background-color: $color-secondary;
+		opacity: .8;
+		padding-bottom: em(5px);
+		// @include mq(sm) {
+		// 	flex-direction: row;
+		// }
+	}
+
+	&__artist {
+		display: none;
+		flex: 1;
+
+		@include mq(ml) {
+			display: block;
+		}
+	}
+
+	&__address {
+		display: none;
+		flex: 1;
+
+		@include mq(sm) {
+			display: block;
+		}
+	}
+
+	&__social {
+		flex: 1;
+	}
+
+	&__social-hover-box {
+		padding: em(4px);
+	}
+
+	&__social-srt {
+		@extend %srt-default;
+	}
+
+	&__content-container {
+		max-width: 400px;
+    	margin: 0 auto;
+	}
+
+	&__artist-content-container {
+		@extend %footer__content-container-default;
+		padding: 0 em(6px);
+	}
+
+	&__address-content-container {
+		@extend %footer__content-container-default;
+	}
+
+	&__social-content-container {
+		@extend %footer__content-container-default;
+		@include flexy($dir: row, $just: space-around);
+	}
+
+	&__header {
+		font: em(24px) $header-font;
+		margin: 0;
+		text-align: center;
+		color: white;
+
+		@include mq(sm) {
+			margin: em(16px, $context: 24px);
+		}
+	}
+
+	&__text-artist {
+		@extend %footer__body-text-default;
+	}
+
+	&__artist-link {
+		text-decoration: underline;
+		color: white;
+	}
+
+	&__text-address {
+		@extend %footer__body-text-default;
+		text-align: center;
+	}
+
+	&__social-link {
+		@extend %footer__social-link-default;
+		// color: white;
+	    // border: 3px solid white;
+	}
+
+	&__base {
+		background-color: $color-primary;
+		opacity: .8;
+	}
+
+	&__base-text{
+		padding: em(5px, $context: 16px);
+		font-size: em(14px, $context: 16px);
+		@include mq(sm) {
+			padding: em(10px, $context: 16px);
+			font-size: em(16px, $context: 16px);
+		}
+	}
+
+
+}
+
+
+//=======================================================
+//modifier styles
+//=======================================================
+
+.footer {
+	&__social-link--hover {
+		@extend %footer__social-link-default;
+		transform: rotateY(360deg);
+	}
+}
+
+
+//=======================================================
+//element id styles
+//=======================================================
+
+//specify background color of artist-link to the element's id to overide the active class background color. 
+//element will stay default color even when active.
+#footer {
+	&__artist-link {
+		background-color: $color-secondary;
+		opacity: .8;
+	}
+}
