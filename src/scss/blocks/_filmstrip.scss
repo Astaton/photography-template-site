@@ -19,6 +19,7 @@
 %filmstrip__control-default {
 	@extend %ust-default;
 	position: absolute;
+	z-index: placeOnLayer(midBack);
 	font-size: em(32px);
 	color: white;
 	padding: 0 em(8px, $context: 32px);
@@ -29,6 +30,9 @@
 	&:active {
 		background-color: #000000CC;
 		color: $color-primary;
+	}
+	&:hover {
+		color: lighten($color-primary, 20%);
 	}
 }
 
@@ -63,6 +67,18 @@
 		width: 200px;
 	}
 
+	&__selector-cell {
+		position: absolute;
+		z-index: placeOnLayer(back);
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 200px;
+		background-color: $color-primary;
+		opacity: .5;
+		transition: all .5s;
+	}
+
 	&__image-wrapper {
 		@include flexy($dir: column, $just: space-around);
 		width: 100%;
@@ -74,6 +90,28 @@
 		position: absolute;
 		max-height: 150px;
 		max-width: 200px
+	}
+
+	&__image-overlay {
+		position: absolute;
+		z-index: placeOnLayer(midBack);
+		background: #ffffff00;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		transition: all .5s;
+
+		&:hover {
+			border: 2px solid white;
+    		box-sizing: border-box;
+			    background: linear-gradient(135deg,          
+			    	#fff0 10%, #ffffffc2 15%, #fff0 17%,          
+			    	#fff0 31%, #ffffff96 35%, #fff0 39%,          
+			    	#fff0 47%, #ffffff61 50%, #fff0 53%,          
+			    	#fff0 54%, #ffffff7a 55%, #fff0 58%,          
+			    	#fff0 65%, #ffffff85 68%, #fff0 71%,          
+			    	#fff0 85%, #ffffffad 87%, #fff0 88%);
+		}
 	}
 }
 //=======================================================

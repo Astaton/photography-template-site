@@ -57,7 +57,7 @@ class Projector extends Component {
 		let { currentSlideNo, slides } = this.props.projector;
 		this.props.increment_slide(currentSlideNo, slides.length);
 		//delayed so that redux has time to update store from increment_slide()
-		setTimeout( () => { this.updateSlideShow(); }, 50);
+		setTimeout( () => { this.updateSlideShow() }, 50);
 	}
 
 
@@ -65,12 +65,13 @@ class Projector extends Component {
 		let { currentSlideNo, slides } = this.props.projector;
 		this.props.decrement_slide(currentSlideNo, slides.length);
 		//delayed so that redux has time to update store from decrement_slide()
-		setTimeout( () => { this.updateSlideShow(); }, 50);
+		setTimeout( () => { this.updateSlideShow() }, 50);
 	}
 
 
 	updateSlideShow() {
 		let { slides, currentSlideNo } = this.props.projector;
+		this.filmstripOverlayShifter();
 		this.props.store_current_slide_info(slides[currentSlideNo]);
 	}
 
@@ -126,7 +127,7 @@ class Projector extends Component {
 	}
 
 
-	shiftControls() {
+	shiftProjectorControls() {
 		//make sure modified class is not on before toggling
 		if($("#projector__control-left").hasClass("projector__control-left")){
 			$("#projector__control-left").toggleClass("projector__control-left--shift");
@@ -144,15 +145,13 @@ class Projector extends Component {
 	}
 
 
-	unshiftControls() {
+	unshiftProjectorControls() {
 		//make sure modified class is on before toggling it off
 		if($("#projector__control-left").hasClass("projector__control-left--shift")){
 			$("#projector__control-left").toggleClass("projector__control-left");
 			$("#projector__control-left").toggleClass("projector__control-left--shift");
 			$("#projector__control-right").toggleClass("projector__control-right");
 			$("#projector__control-right").toggleClass("projector__control-right--shift");
-			$("#projector__control-down").toggleClass("projector__control-down");
-			$("#projector__control-down").toggleClass("projector__control-down--shift");
 			$("#projector__control-pause").toggleClass("projector__control-pause");
 			$("#projector__control-pause").toggleClass("projector__control-pause--shift");
 			//If control-down is in use by the filmstrip leave it alone
@@ -164,10 +163,16 @@ class Projector extends Component {
 	}
 
 
+	filmstripOverlayShifter() {
+		let currentSlideNo = this.props.projector.currentSlideNo;
+		$("#filmstrip__selector-cell").css('left', currentSlideNo*200);
+	}
+
+
 	render(){
 		let { currentSlideInfo, showFilmstrip, slides } = this.props.projector;
 		return(
-			<div id="projector" className="projector" onMouseEnter={ () => this.shiftControls()} onMouseLeave={ () => this.unshiftControls()}>
+			<div id="projector" className="projector" onMouseEnter={ () => this.shiftProjectorControls()} onMouseLeave={ () => this.unshiftProjectorControls()}>
 				{currentSlideInfo ? 
 					<Slide photoInfo={currentSlideInfo} 
 						styleFor={this.props.styleFor} 

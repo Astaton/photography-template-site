@@ -9,7 +9,7 @@
 	cursor: pointer;
 	color: darken($color-secondary, 5%);
 	z-index: placeOnLayer(front);
-	transition: all .6s;
+	transition: all .75s;
 	border: em(1px, $context: 32px) solid #c4bcbc;
 	background-color: #c4bcbc; 
     border-radius: 50%;
@@ -41,6 +41,7 @@
 		@extend %projector__control-stub;
 		right: 50%;
 		margin-right: em(-16px, $context: 32px);
+		transform: rotatez(180deg);
 		bottom: 0;
 	}
 
@@ -109,6 +110,7 @@
 	&__control-down--filmstrip-shift {
 		@extend %projector__control-down-default;
 		bottom: em(165px, $context: 32px);
+		transform: rotatez(360deg);
 		opacity: 1;
 	}
 

@@ -43,9 +43,14 @@ class Gallery extends Component {
 			$("#gallery__images").toggleClass("gallery__images-closed");
 			$("#gallery__images").toggleClass("gallery__images");
 		}
-		if(!$("#projector__control-down").hasClass("projector__control-down")){
-			$("#projector__control-down").toggleClass("projector__control-down--shift");
+		if($("#projector__control-down").hasClass("projector__control-down--filmstrip-shift")){
 			$("#projector__control-down").toggleClass("projector__control-down--filmstrip-shift");
+		}
+		if($("#projector__control-down").hasClass("projector__control-down--shift")){
+			$("#projector__control-down").toggleClass("projector__control-down--shift");
+		}
+		if(!$("#projector__control-down").hasClass("projector__control-down")){
+			$("#projector__control-down").toggleClass("projector__control-down");
 		}
 	}
 

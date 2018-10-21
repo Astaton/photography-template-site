@@ -36,6 +36,7 @@ class Filmstrip extends Component{
 						>
 						</img>
 					</div>
+					<div className="filmstrip__image-overlay" id="filmstrip__image-overlay"></div>
 					<Loader loaderId={`filmstripImageLoader__${name}`}/>
 				</div>
 			)
@@ -44,7 +45,7 @@ class Filmstrip extends Component{
 	}
 
 	filmstripLeft() {
-		console.log("shifted filmstrip left")
+		console.log("shifted filmstrip left");
 	}
 
 	filmstripRight() {
@@ -65,6 +66,8 @@ class Filmstrip extends Component{
 					<b className="filmstrip__control-srt">filmstrip right</b>
 					<i className="fas fa-angle-right" onClick={() => this.filmstripRight()} ></i>
 				</span>
+				<div className="filmstrip__selector-cell" id="filmstrip__selector-cell">
+				</div>
 			</div>
 		)
 	}
