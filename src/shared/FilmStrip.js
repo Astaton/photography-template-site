@@ -88,11 +88,26 @@ class Filmstrip extends Component{
 		this.filmstripContainerShifter(-200);
 	}
 
+	highlightFilmstripControls() {
+		$("#filmstrip__control-left").addClass("filmstrip__control-left--highlight");
+		$("#filmstrip__control-left").removeClass("filmstrip__control-left");
+		$("#filmstrip__control-right").addClass("filmstrip__control-right--highlight");
+		$("#filmstrip__control-right").removeClass("filmstrip__control-right");
+		setTimeout( () => {
+			$("#filmstrip__control-left").addClass("filmstrip__control-left");
+			$("#filmstrip__control-left").removeClass("filmstrip__control-left--highlight");
+			$("#filmstrip__control-right").addClass("filmstrip__control-right");
+			$("#filmstrip__control-right").removeClass("filmstrip__control-right--highlight");
+		}, 500);
+	}
+
 
 	render() {
 		let slides = this.props.slides;
 		return(
-			<div id="filmstrip__container" className="filmstrip__container">
+			<div id="filmstrip__container" className="filmstrip__container"
+				onMouseEnter={ () => this.highlightFilmstripControls()} 
+			>
 				{ slides ? this.mapSlidesToFilmstrip(slides) : null }
 				<span id="filmstrip__control-left" 
 					className="filmstrip__control-left" 

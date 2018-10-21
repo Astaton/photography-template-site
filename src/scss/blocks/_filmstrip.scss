@@ -22,17 +22,17 @@
 	z-index: placeOnLayer(midBack);
 	font-size: em(32px);
 	color: white;
-	padding: 0 em(8px, $context: 32px);
+	padding: em(16px, $context: 32px) em(8px, $context: 32px);
 	background-color: #00000096;
 	top: 50%;
-	margin-top: em(-8px, $context: 32px);
+	margin-top: em(-16px, $context: 32px);
 	transition: color .25s, background-color .25s, left .5s;
 	&:active {
-		background-color: #000000CC;
+		background-color: #000000DD;
 		color: $color-primary;
 	}
 	&:hover {
-		color: lighten($color-primary, 20%);
+		color: lighten($color-primary, 10%);
 	}
 }
 
@@ -123,4 +123,18 @@
 	visibility: visible;
 	bottom: 0;
 	opacity: 1;
+}
+
+.filmstrip__control {
+	&-left--highlight{
+		@extend .filmstrip__control-left;
+		color: $color-primary;
+		background-color: #CCCCCCAA;
+	}
+
+	&-right--highlight{
+		@extend .filmstrip__control-right;
+		color: $color-primary;
+		background-color: #CCCCCCAA;
+	}
 }
