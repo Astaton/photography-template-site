@@ -18,6 +18,8 @@ import * as actionCreators from './actions/projector_actions';
 class Projector extends Component {
 	constructor(props) {
 		super(props)
+		this.filmstripContainerShifter = this.filmstripContainerShifter.bind(this);
+		this.filmstripContainerJumpShifter = this.filmstripContainerJumpShifter.bind(this);
 	}
 
 
@@ -131,7 +133,10 @@ class Projector extends Component {
 	projectorDownHandler() {
 		let calculatedWidth = this.props.projector.slides.length*200+"px";
 		this.props.show_filmstrip(!this.props.projector.showFilmstrip);
-		setTimeout( () => { $('#filmstrip__container').css('width', calculatedWidth) }, 25);
+		setTimeout( () => { 
+			$('#filmstrip__container').css('width', calculatedWidth);
+			this.filmstripContainerJumpShifter(); 
+		}, 25);
 		$("#projector__control-down").toggleClass("projector__control-down--filmstrip-shift");
 		$("#projector__control-down").toggleClass("projector__control-down--shift");
 		$("#filmstrip__container").toggleClass("filmstrip__container--slide-in");
@@ -181,6 +186,60 @@ class Projector extends Component {
 	}
 
 
+	filmstripContainerShifter(shiftBy) {
+		let travelDistance = document.getElementById('filmstrip__container').offsetWidth -document.getElementById('projector').offsetWidth;
+		// console.log(document.getElementById('filmstrip__container').offsetWidth);
+		let proposedPosition = parseInt($('#filmstrip__container').css('left')) + shiftBy;
+		if(travelDistance <= 0 || proposedPosition > 0 || travelDistance + proposedPosition < 0){
+			return
+		}
+		let filmstripPosition = parseInt($('#filmstrip__container').css('left'));
+		let leftArrowPosition = parseInt($('#filmstrip__control-left').css('left'));
+		let rightArrowPosition = parseInt($('#filmstrip__control-right').css('left'));
+		$('#filmstrip__container').css('left', filmstripPosition + shiftBy);
+		$('#filmstrip__control-left').css('left', leftArrowPosition + (shiftBy*-1));
+		$('#filmstrip__control-right').css('left', rightArrowPosition + (shiftBy*-1));
+	}
+	
+
+	filmstripContainerJumpShifter(shiftTo) {
+		console.log("shiftTo is: "+shiftTo);
+		if(shiftTo === undefined){
+			shiftTo = this.props.projector.currentSlideNo * -200;
+			console.log("undefined shiftTo, setting shiftTo", shiftTo);
+		}
+		let projectorDisplayWidth = document.getElementById('projector').offsetWidth;
+		let projectorBoxCenter = projectorDisplayWidth/2 - (projectorDisplayWidth/2)%200;
+		let filmstripWidth = document.getElementById('filmstrip__container').offsetWidth;
+		let rightArrowWidth = document.getElementById('filmstrip__control-right').offsetWidth;
+		let travelDistance = (filmstripWidth*-1)  + projectorDisplayWidth;
+		let leftArrowOffset = 8;
+		let rightArrowOffset = projectorDisplayWidth - (rightArrowWidth + 8);
+		let filmstripOffset = 0;
+		let centerCell = shiftTo + projectorBoxCenter;
+		if(travelDistance >= 0){
+			console.log("travelDistance");
+			return
+		} 
+		if(centerCell >= 0){
+			console.log("centerCell");
+			$('#filmstrip__container').css('left', filmstripOffset);
+			$('#filmstrip__control-left').css('left', leftArrowOffset);
+			$('#filmstrip__control-right').css('left',  rightArrowOffset);
+			return
+		}
+		if(centerCell <= travelDistance){
+			$('#filmstrip__container').css('left', travelDistance);
+			$('#filmstrip__control-left').css('left', (travelDistance*-1) + leftArrowOffset);
+			$('#filmstrip__control-right').css('left', (travelDistance*-1) + rightArrowOffset);
+			return
+		}
+		$('#filmstrip__container').css('left', centerCell);
+		$('#filmstrip__control-left').css('left', (centerCell*-1) + leftArrowOffset);
+		$('#filmstrip__control-right').css('left', (centerCell*-1) + rightArrowOffset);
+	}
+
+
 	render(){
 		let { currentSlideInfo, showFilmstrip, slides } = this.props.projector;
 		return(
@@ -198,7 +257,9 @@ class Projector extends Component {
 				}
 				{slides ?
 					<Filmstrip slides={slides} 
-						updateSlideShow={ () => this.updateSlideShow()}
+						updateSlideShow={ () => this.updateSlideShow() }
+						filmstripContainerShifter={ this.filmstripContainerShifter }
+						filmstripContainerJumpShifter={ this.filmstripContainerJumpShifter }
 					/>
 					:
 					null

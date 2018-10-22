@@ -56,69 +56,23 @@ class Filmstrip extends Component{
 
 	filmstripCellClickHandler(slideNo) {
 		this.props.store_current_slide_no(slideNo);
-		this.filmstripContainerJumpShifter(slideNo*-200);
+		this.props.filmstripContainerJumpShifter(slideNo*-200);
 		setTimeout( () => { 
 			this.props.updateSlideShow() 
 		});
 	}
 
-	filmstripContainerShifter(shiftBy) {
-		let travelDistance = document.getElementById('filmstrip__container').offsetWidth -document.getElementById('projector').offsetWidth;
-		// console.log(document.getElementById('filmstrip__container').offsetWidth);
-		let proposedPosition = parseInt($('#filmstrip__container').css('left')) + shiftBy;
-		if(travelDistance <= 0 || proposedPosition > 0 || travelDistance + proposedPosition < 0){
-			return
-		}
-		let filmstripPosition = parseInt($('#filmstrip__container').css('left'));
-		let leftArrowPosition = parseInt($('#filmstrip__control-left').css('left'));
-		let rightArrowPosition = parseInt($('#filmstrip__control-right').css('left'));
-		$('#filmstrip__container').css('left', filmstripPosition + shiftBy);
-		$('#filmstrip__control-left').css('left', leftArrowPosition + (shiftBy*-1));
-		$('#filmstrip__control-right').css('left', rightArrowPosition + (shiftBy*-1));
-	}
-
-
-	filmstripContainerJumpShifter(shiftTo) {
-		let projectorDisplayWidth = document.getElementById('projector').offsetWidth;
-		let projectorBoxCenter = projectorDisplayWidth/2 - (projectorDisplayWidth/2)%200;
-		let filmstripWidth = document.getElementById('filmstrip__container').offsetWidth;
-		let rightArrowWidth = document.getElementById('filmstrip__control-right').offsetWidth;
-		let travelDistance = (filmstripWidth*-1)  + projectorDisplayWidth;
-		let leftArrowOffset = 8;
-		let rightArrowOffset = projectorDisplayWidth - (rightArrowWidth + 8);
-		let filmstripOffset = 0;
-		let centerCell = shiftTo + projectorBoxCenter;
-		if(travelDistance >= 0){
-			return
-		} 
-		if(centerCell >= 0){
-			$('#filmstrip__container').css('left', filmstripOffset);
-			$('#filmstrip__control-left').css('left', leftArrowOffset);
-			$('#filmstrip__control-right').css('left',  rightArrowOffset);
-			return
-		}
-		if(centerCell <= travelDistance){
-			$('#filmstrip__container').css('left', travelDistance);
-			$('#filmstrip__control-left').css('left', (travelDistance*-1) + leftArrowOffset);
-			$('#filmstrip__control-right').css('left', (travelDistance*-1) + rightArrowOffset);
-			return
-		}
-		$('#filmstrip__container').css('left', centerCell);
-		$('#filmstrip__control-left').css('left', (centerCell*-1) + leftArrowOffset);
-		$('#filmstrip__control-right').css('left', (centerCell*-1) + rightArrowOffset);
-	}
-
 
 	filmstripLeft() {
 		if(parseInt($('#filmstrip__container').css('left')) === 0 || parseInt($('#filmstrip__container').css('left'))%200 === 0){
-			this.filmstripContainerShifter(200);
+			this.props.filmstripContainerShifter(200);
 		}
 	}
 
 
 	filmstripRight() {
 		if(parseInt($('#filmstrip__container').css('left')) === 0 || parseInt($('#filmstrip__container').css('left'))%200 === 0){
-			this.filmstripContainerShifter(-200);
+			this.props.filmstripContainerShifter(-200);
 		}
 	}
 
