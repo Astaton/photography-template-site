@@ -64,7 +64,7 @@ class Filmstrip extends Component{
 
 	filmstripContainerShifter(shiftBy) {
 		let travelDistance = document.getElementById('filmstrip__container').offsetWidth -document.getElementById('projector').offsetWidth;
-		console.log(document.getElementById('filmstrip__container').offsetWidth);
+		// console.log(document.getElementById('filmstrip__container').offsetWidth);
 		let proposedPosition = parseInt($('#filmstrip__container').css('left')) + shiftBy;
 		if(travelDistance <= 0 || proposedPosition > 0 || travelDistance + proposedPosition < 0){
 			return
@@ -103,13 +103,18 @@ class Filmstrip extends Component{
 
 
 	filmstripLeft() {
-		this.filmstripContainerShifter(200);
-
+		if(parseInt($('#filmstrip__container').css('left')) === 0 || parseInt($('#filmstrip__container').css('left'))%200 === 0){
+			this.filmstripContainerShifter(200);
+		}
 	}
+
 
 	filmstripRight() {
-		this.filmstripContainerShifter(-200);
+		if(parseInt($('#filmstrip__container').css('left')) === 0 || parseInt($('#filmstrip__container').css('left'))%200 === 0){
+			this.filmstripContainerShifter(-200);
+		}
 	}
+
 
 	highlightFilmstripControls() {
 		$("#filmstrip__control-left").addClass("filmstrip__control-left--highlight");
