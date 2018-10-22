@@ -105,8 +105,16 @@ class Projector extends Component {
 		let pauseSlideShow = this.props.projector.pauseSlideShow;
 		if(pauseSlideShow == false){
 			this.props.pause_slide_show(true);
+			$("#projector__control-pause-icon").addClass("projector__control-pause-icon--hidden");
+			$("#projector__control-pause-icon").removeClass("projector__control-pause-icon");
+			$("#projector__control-play-icon").addClass("projector__control-play-icon");
+			$("#projector__control-play-icon").removeClass("projector__control-play-icon--hidden");
 		}else{
 			this.props.pause_slide_show(false);
+			$("#projector__control-pause-icon").addClass("projector__control-pause-icon");
+			$("#projector__control-pause-icon").removeClass("projector__control-pause-icon--hidden");
+			$("#projector__control-play-icon").addClass("projector__control-play-icon--hidden");
+			$("#projector__control-play-icon").removeClass("projector__control-play-icon");
 		}
 	}
 
@@ -195,21 +203,40 @@ class Projector extends Component {
 					:
 					null
 				}
-				<span id="projector__control-left" className="projector__control-left" title="See previous photo">
+				<span id="projector__control-left" 
+					className="projector__control-left" 
+					title="See previous photo"
+					onClick={() => this.previousSlide()}
+					>
 					<b className="projector__control-srt">left arrow</b>
-					<i className="fas fa-chevron-circle-left" onClick={() => this.previousSlide()} ></i>
+					<i className="fas fa-chevron-circle-left" ></i>
 				</span>
-				<span id="projector__control-right" className="projector__control-right" title="See next photo">
+				<span id="projector__control-right" 
+					className="projector__control-right" 
+					title="See next photo"
+					onClick={() => this.nextSlide()}
+					>
 					<b className="projector__control-srt">right arrow</b>
-					<i className="fas fa-chevron-circle-right" onClick={() => this.nextSlide()} ></i>
+					<i className="fas fa-chevron-circle-right" ></i>
 				</span>
-				<span id="projector__control-down" className="projector__control-down" title="See all photos in current gallery">
+				<span id="projector__control-down" 
+					className="projector__control-down" 
+					title="See all photos in current gallery"
+					onClick={() => this.projectorDownHandler()}
+				>
 					<b className="projector__control-srt">down arrow</b>
-					<i className="fas fa-chevron-circle-down" onClick={() => this.projectorDownHandler()}></i>
+					<i className="fas fa-chevron-circle-down" ></i>
 				</span>
-				<span id="projector__control-pause" className="projector__control-pause" title="Pause slide show">
+				<span id="projector__control-pause" 
+					className="projector__control-pause" 
+					title="Pause slide show" 
+					onClick={() => this.pauseButtonHandler()}
+				>
 					<b className="projector__control-srt">pause arrow</b>
-					<i className="fas fa-pause-circle" onClick={() => this.pauseButtonHandler()}></i>
+					<div className="projector__controls-pause-play-icon-wrapper">
+						<i id="projector__control-pause-icon" className="fas fa-pause-circle projector__control-pause-icon"></i>
+						<i id="projector__control-play-icon" className="fas fa-play-circle projector__control-play-icon--hidden"></i>
+					</div>
 				</span>
 			</div>
 		)

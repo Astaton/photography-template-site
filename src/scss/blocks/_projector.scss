@@ -44,13 +44,25 @@
 		transform: rotatez(180deg);
 		bottom: 0;
 	}
-
+	
 	&-pause-default {
 		@extend %projector__control-stub;
 		top: 0;
 		right: 0;
 	}
 
+	&-pause-icon-default {
+		opacity: 1;
+		transition: opacity .75s;
+	}
+
+	&-play-icon-default {
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 1;
+		transition: opacity .75s;
+	}
 }
 
 //=======================================================
@@ -77,8 +89,20 @@
 		@extend %projector__control-down-default;
 	}
 
+	&__controls-pause-play-icon-wrapper {
+		position: relative;
+	}
+
 	&__control-pause {
 		@extend %projector__control-pause-default;
+	}
+
+	&__control-pause-icon {
+		@extend %projector__control-pause-icon-default;
+	}
+
+	&__control-play-icon {
+		@extend %projector__control-play-icon-default;
 	}
 }
 
@@ -119,5 +143,15 @@
 		margin-top: em(16px, $context: 32px);
 	    margin-right: em(16px, $context: 32px);
 	    opacity: 1;
+	}
+
+	&__control-pause-icon--hidden {
+		@extend %projector__control-pause-icon-default;
+		opacity: 0;
+	}
+
+	&__control-play-icon--hidden {
+		@extend %projector__control-play-icon-default;
+		opacity: 0;
 	}
 }
