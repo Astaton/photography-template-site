@@ -86,14 +86,17 @@ class Projector extends Component {
 
 
 	autoRunProjector() {
+		let halfSecCounter = 0;
 		let intervalTimer = setInterval( ()=> {
 			if(this.props.projector.slides === undefined){
 				this.loadProjector();
 			}
-			if(this.props.projector.pauseSlideShow == false){
+			halfSecCounter += 500;
+			if(this.props.projector.pauseSlideShow == false && halfSecCounter >= 6500){
 				this.nextSlide();
+				halfSecCounter = 0;
 			}
-		},6500);
+		},500);
 		this.props.store_timer(intervalTimer);
 	}
 

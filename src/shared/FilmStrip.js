@@ -55,17 +55,16 @@ class Filmstrip extends Component{
 	}
 
 	filmstripCellClickHandler(slideNo) {
-		console.log('slideNo is: ', slideNo);
 		this.props.store_current_slide_no(slideNo);
+		this.filmstripContainerJumpShifter(slideNo*-200);
 		setTimeout( () => { 
-			console.log("before call to updateSlideShow props are: ", this.props);
 			this.props.updateSlideShow() 
 		});
-		// this.props.store_current_slide_info(slideInfo);
 	}
 
 	filmstripContainerShifter(shiftBy) {
 		let travelDistance = document.getElementById('filmstrip__container').offsetWidth -document.getElementById('projector').offsetWidth;
+		console.log(document.getElementById('filmstrip__container').offsetWidth);
 		let proposedPosition = parseInt($('#filmstrip__container').css('left')) + shiftBy;
 		if(travelDistance <= 0 || proposedPosition > 0 || travelDistance + proposedPosition < 0){
 			return
@@ -76,6 +75,30 @@ class Filmstrip extends Component{
 		$('#filmstrip__container').css('left', filmstripPosition + shiftBy);
 		$('#filmstrip__control-left').css('left', leftArrowPosition + (shiftBy*-1));
 		$('#filmstrip__control-right').css('left', rightArrowPosition + (shiftBy*-1));
+	}
+
+	filmstripContainerJumpShifter(shiftTo) {
+		// let travelDistance = (document.getElementById('filmstrip__container').offsetWidth - document.getElementById('projector').offsetWidth) *-1 ;
+		// //box should be a multiple of 100 filmstrip cells are 200px across. If the center is not multiple of 200 and minus 100 to shift to the next cell space.
+		// let projectorBoxCenter = document.getElementById('projector').offsetWidth / 2;
+		// projectorBoxCenter -= (projectorBoxCenter%200);
+		// travelDistance += projectorBoxCenter; 
+		// let goTo = 0;
+		// if(shiftTo + projectorBoxCenter <= 0){
+		// 	return
+		// }
+		// if(shiftTo <= travelDistance){
+		// 	return goTo = travelDistance;
+		// }
+		// goTo = shiftTo + projectorBoxCenter;
+		// console.log("travelDistance is: "+travelDistance+" projectorBoxCenter is: "+projectorBoxCenter+" goTo is: "+goTo);
+		// let filmstripPosition = parseInt($('#filmstrip__container').css('left'));
+		// let leftArrowPosition = parseInt($('#filmstrip__control-left').css('left'));
+		// let rightArrowPosition = parseInt($('#filmstrip__control-right').css('left'));
+		// console.log("filmstripPosition: "+filmstripPosition+", leftArrowPosition: "+leftArrowPosition+", rightArrowPosition: "+rightArrowPosition);
+		// $('#filmstrip__container').css('left', filmstripPosition + goTo);
+		// $('#filmstrip__control-left').css('left', leftArrowPosition + goTo);
+		// $('#filmstrip__control-right').css('left', rightArrowPosition + goTo);
 	}
 
 

@@ -85,7 +85,10 @@ class GallerySelector extends Component {
 		console.log("clicked goToGallery on "+ gallery);
 		this.props.unload_slides();
 		this.props.choose_gallery(gallery);
-		setTimeout( () => { this.openGallery(); }, 50);
+		setTimeout( () => { 
+			this.openGallery(); 
+			// this.props.gallery.slides[0];
+		}, 50);
 	}
 
 	openGallery() {
