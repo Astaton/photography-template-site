@@ -229,7 +229,7 @@ class Projector extends Component {
 				</span>
 				<span id="projector__control-pause" 
 					className="projector__control-pause" 
-					title="Pause slide show" 
+					title="Pause/Play slide show" 
 					onClick={() => this.pauseButtonHandler()}
 				>
 					<b className="projector__control-srt">pause arrow</b>

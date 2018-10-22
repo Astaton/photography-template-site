@@ -77,28 +77,35 @@ class Filmstrip extends Component{
 		$('#filmstrip__control-right').css('left', rightArrowPosition + (shiftBy*-1));
 	}
 
+
 	filmstripContainerJumpShifter(shiftTo) {
-		// let travelDistance = (document.getElementById('filmstrip__container').offsetWidth - document.getElementById('projector').offsetWidth) *-1 ;
-		// //box should be a multiple of 100 filmstrip cells are 200px across. If the center is not multiple of 200 and minus 100 to shift to the next cell space.
-		// let projectorBoxCenter = document.getElementById('projector').offsetWidth / 2;
-		// projectorBoxCenter -= (projectorBoxCenter%200);
-		// travelDistance += projectorBoxCenter; 
-		// let goTo = 0;
-		// if(shiftTo + projectorBoxCenter <= 0){
-		// 	return
-		// }
-		// if(shiftTo <= travelDistance){
-		// 	return goTo = travelDistance;
-		// }
-		// goTo = shiftTo + projectorBoxCenter;
-		// console.log("travelDistance is: "+travelDistance+" projectorBoxCenter is: "+projectorBoxCenter+" goTo is: "+goTo);
-		// let filmstripPosition = parseInt($('#filmstrip__container').css('left'));
-		// let leftArrowPosition = parseInt($('#filmstrip__control-left').css('left'));
-		// let rightArrowPosition = parseInt($('#filmstrip__control-right').css('left'));
-		// console.log("filmstripPosition: "+filmstripPosition+", leftArrowPosition: "+leftArrowPosition+", rightArrowPosition: "+rightArrowPosition);
-		// $('#filmstrip__container').css('left', filmstripPosition + goTo);
-		// $('#filmstrip__control-left').css('left', leftArrowPosition + goTo);
-		// $('#filmstrip__control-right').css('left', rightArrowPosition + goTo);
+		let projectorDisplayWidth = document.getElementById('projector').offsetWidth;
+		let projectorBoxCenter = projectorDisplayWidth/2 - (projectorDisplayWidth/2)%200;
+		let filmstripWidth = document.getElementById('filmstrip__container').offsetWidth;
+		let rightArrowWidth = document.getElementById('filmstrip__control-right').offsetWidth;
+		let travelDistance = (filmstripWidth*-1)  + projectorDisplayWidth;
+		let leftArrowOffset = 8;
+		let rightArrowOffset = projectorDisplayWidth - (rightArrowWidth + 8);
+		let filmstripOffset = 0;
+		let centerCell = shiftTo + projectorBoxCenter;
+		if(travelDistance >= 0){
+			return
+		} 
+		if(centerCell >= 0){
+			$('#filmstrip__container').css('left', filmstripOffset);
+			$('#filmstrip__control-left').css('left', leftArrowOffset);
+			$('#filmstrip__control-right').css('left',  rightArrowOffset);
+			return
+		}
+		if(centerCell <= travelDistance){
+			$('#filmstrip__container').css('left', travelDistance);
+			$('#filmstrip__control-left').css('left', (travelDistance*-1) + leftArrowOffset);
+			$('#filmstrip__control-right').css('left', (travelDistance*-1) + rightArrowOffset);
+			return
+		}
+		$('#filmstrip__container').css('left', centerCell);
+		$('#filmstrip__control-left').css('left', (centerCell*-1) + leftArrowOffset);
+		$('#filmstrip__control-right').css('left', (centerCell*-1) + rightArrowOffset);
 	}
 
 
