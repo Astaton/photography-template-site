@@ -61,10 +61,3 @@ export function show_filmstrip(showFilmstrip) {
 		showFilmstrip
 	}
 }
-
-export function store_filmstrip_default_positions(filmstripDefaultPositions) {
-	return {
-		type: 'STORE_FILMSTRIP_DEFAULT_POSITIONS',
-		filmstripDefaultPositions
-	}
-}

@@ -1,5 +1,6 @@
 //React imports
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 //Redux imports
 import { bindActionCreators } from 'redux';
@@ -21,8 +22,11 @@ class Gallery extends Component {
 	}
 
 	componentDidMount() {
+		let gallery = this.props.match.params.gallery;
 		console.log("on mount Gallery props are", this.props);
-		console.log();
+		if(gallery){
+			this.goToGallery(gallery);
+		}
 	}
 
 	componentDidUpdate() {
@@ -31,6 +35,34 @@ class Gallery extends Component {
 
 	componentWillUnmount() {
 		this.closeGallery();
+	}
+
+
+	goToGallery(gallery) {
+		console.log("clicked goToGallery");
+		this.props.actions.choose_gallery(gallery);
+		this.props.actions.unload_slides();
+		setTimeout( () => { 
+			this.openGallery(); 
+		}, 50);
+	}
+
+
+	openGallery() {
+		console.log("Attempting to open the gallery");
+		if($("#main").hasClass("main")){
+			$("#main").toggleClass("main--gallery");
+			$("#main").toggleClass("main");
+			$("#gallerySelector__container").toggleClass("gallerySelector__container--open");
+			$("#gallerySelector__container").toggleClass("gallerySelector__container");
+			$("#gallery__images").toggleClass("gallery__images");
+			$("#gallery__images").toggleClass("gallery__images-closed");
+		}
+		setTimeout( () => {
+			$('html,body').animate({
+				scrollTop: $("#main").offset().top
+			});
+		},1500);
 	}
 
 
@@ -52,19 +84,30 @@ class Gallery extends Component {
 		if(!$("#projector__control-down").hasClass("projector__control-down")){
 			$("#projector__control-down").toggleClass("projector__control-down");
 		}
+		console.log("attempting push to history");
+		// withRouter( ({ history }) => { history.push('/gallery') } );
 	}
 
 
-
+	//choose_gallery={ this.props.actions.choose_gallery }
 	render(){
+		const Close = withRouter( ({ history }) => (
+		<span className="gallery__close" 
+			title="Close Gallery" 
+			onClick={ () => { 
+				this.closeGallery(); 
+				history.push('/gallery');
+			}}
+		>
+			<b className="gallery__close-srt">Close Gallery</b>
+			X
+		</span>
+		));
 		let slides = this.props.gallery.slides;
 		return(
 			<div className="main" id="main">
-				<GallerySelector choose_gallery={ this.props.actions.choose_gallery } unload_slides={ this.props.actions.unload_slides }/>
-				<span className="gallery__close" title="Close Gallery" onClick={ () => this.closeGallery() }>
-				<b className="gallery__close-srt">Close Gallery</b>
-				X
-				</span>
+				<GallerySelector goToGallery={ this.goToGallery }/>
+				<Close />
 				<div className="gallery__images-closed" id="gallery__images">
 					<Projector styleFor={"gallery"} slides={slides}/>
 				</div>

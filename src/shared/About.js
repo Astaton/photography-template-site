@@ -21,7 +21,6 @@ class About extends Component {
 
 	componentDidMount() {
 		this.toggleAboutModifierOn()
-		// this.props.actions.unload_slides();
 		console.log('About props are', this.props);
 	}
 

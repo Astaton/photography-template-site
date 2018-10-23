@@ -38,11 +38,6 @@ class Projector extends Component {
 	}
 
 
-	componentDidUpdate() {
-		// console.log("on update Projector props are", this.props);
-	}
-
-
 	componentWillUnmount() {
 		clearInterval(this.props.projector.intervalTimer);
 		this.props.show_filmstrip(false);
@@ -188,7 +183,6 @@ class Projector extends Component {
 
 	filmstripContainerShifter(shiftBy) {
 		let travelDistance = document.getElementById('filmstrip__container').offsetWidth -document.getElementById('projector').offsetWidth;
-		// console.log(document.getElementById('filmstrip__container').offsetWidth);
 		let proposedPosition = parseInt($('#filmstrip__container').css('left')) + shiftBy;
 		if(travelDistance <= 0 || proposedPosition > 0 || travelDistance + proposedPosition < 0){
 			return

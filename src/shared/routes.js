@@ -34,6 +34,11 @@ const routes = [
 	},
 	{
 		path: '/gallery',
+		exact: true,
+		component: Gallery
+	},
+	{
+		path: '/gallery/:gallery',
 		exact: false,
 		component: Gallery
 	},

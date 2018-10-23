@@ -49,9 +49,6 @@ function projector_reducers(state=initialState, action) {
 		case 'SHOW_FILMSTRIP':
 			let showFilmstrip = action.showFilmstrip;
 			return { ...state, showFilmstrip }
-		case 'STORE_FILMSTRIP_DEFAULT_POSITIONS':
-			let filmstripDefaultPositions = action.filmstripDefaultPositions;
-			return { ...state, filmstripDefaultPositions};
 		default:
 			return state;
 	}
