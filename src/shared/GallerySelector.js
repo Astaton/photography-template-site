@@ -23,7 +23,7 @@ class GallerySelector extends Component {
 	componentDidMount() {
 		this.gallerySelectorLoad();
 		this.addListeners();
-		console.log('GallerySelector props are: ',this.props);
+		// console.log('GallerySelector props are: ',this.props);
 	}
 
 	componentWillUnmount() {
@@ -77,7 +77,6 @@ class GallerySelector extends Component {
 		];
 		gallerySelectorIds.forEach( ({ containerId, gallerySelectorId, galleryName }) => {
 			$(containerId).hover(() => this.hoverIn(gallerySelectorId), () => this.hoverOut(gallerySelectorId));
-			// $(containerId).click(() => this.props.goToGallery());
 		});
 	}
 	

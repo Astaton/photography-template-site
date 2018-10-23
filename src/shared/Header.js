@@ -23,7 +23,7 @@ class Header extends Component {
 	}
 
 	componentDidMount() {
-		console.log('header props are ', this.props);
+		// console.log('header props are ', this.props);
 
 	}
 

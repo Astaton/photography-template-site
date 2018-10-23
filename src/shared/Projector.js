@@ -7,6 +7,9 @@ import { bindActionCreators } from 'redux';
 //React-Redux imports
 import { connect } from 'react-redux';
 
+//queryString import
+import queryString from 'query-string';
+
 //React Component imports
 import Slide from './Slide';
 import Filmstrip from './Filmstrip';
@@ -51,7 +54,15 @@ class Projector extends Component {
 
 
 	nextSlide() {
+		// if(this.props.location.search){
+		// 	let values = queryString.parse(this.props.location.search);
+		// 	let path = this.props.location.pathname;
+		// 	// console.log(values.img);
+		// 	this.props.history.push(`${path}?img=${values.img}`);
+		// }
+		let path = this.props.location.pathname;
 		let { currentSlideNo, slides } = this.props.projector;
+		this.props.history.push(`${path}?img=${slides[currentSlideNo].name}`);
 		this.props.increment_slide(currentSlideNo, slides.length);
 		//delayed so that redux has time to update store from increment_slide()
 		setTimeout( () => { this.updateSlideShow() }, 50);
@@ -75,10 +86,12 @@ class Projector extends Component {
 
 
 	loadProjector() {
-		this.props.load_new_slides(this.props.slides);
-		setTimeout( () => { 
-			this.updateSlideShow(); 
-		}, 50);
+		if(this.props.slides){
+			this.props.load_new_slides(this.props.slides);
+			setTimeout( () => { 
+				this.updateSlideShow(); 
+			}, 50);
+		}
 	}
 
 
@@ -89,7 +102,7 @@ class Projector extends Component {
 				this.loadProjector();
 			}
 			halfSecCounter += 500;
-			if(this.props.projector.pauseSlideShow == false && halfSecCounter >= 6500){
+			if(this.props.projector.slides && this.props.projector.pauseSlideShow == false && halfSecCounter >= 6500){
 				this.nextSlide();
 				halfSecCounter = 0;
 			}

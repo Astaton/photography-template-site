@@ -20,7 +20,7 @@ class Filmstrip extends Component{
 	}
 
 	componentDidMount() {
-		console.log("Filmstrip mounted props are ", this.props);
+		// console.log("Filmstrip mounted props are ", this.props);
 	}
 
 	handleImageLoaded(name) {

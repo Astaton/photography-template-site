@@ -9,12 +9,12 @@ import {
 //React Component imports
 import Header from './Header';
 import Footer from './Footer';
+import NotFound from './NotFound';
 
 //Routes import
 import routes from './routes';
 
 class App extends Component {
-
 	
 	render() {
 		return(
@@ -31,6 +31,8 @@ class App extends Component {
 								)} 
 							/>
 						))}
+						<Redirect path='/home' to='/' />
+						<Route component={NotFound} />
 					</Switch>
 				<Footer />
 			</div>

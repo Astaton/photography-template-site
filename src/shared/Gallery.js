@@ -109,7 +109,10 @@ class Gallery extends Component {
 				<GallerySelector goToGallery={ this.goToGallery }/>
 				<Close />
 				<div className="gallery__images-closed" id="gallery__images">
-					<Projector styleFor={"gallery"} slides={slides}/>
+					<Projector styleFor={"gallery"} slides={slides}
+						history={this.props.history}
+						location={this.props.location}
+					/>
 				</div>
 			</div>
 		)
